@@ -1,8 +1,8 @@
-stockholm
+#stockholm
 
 ransomware emulating wannacry attack
 
-Ways of working:
+#Ways of working:
 
 normal mode: encrypt files at the directory
 reverse mode: '-r ', '--reverse ' decrypt files using the provided key
