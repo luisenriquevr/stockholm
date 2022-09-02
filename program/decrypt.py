@@ -25,7 +25,7 @@ def decrypt(items, key, silent):
 
 if __name__ == '__main__':
 	silent = False
-	if system() == "Linux" and os.getcwd().endswith('home'):
+	if system() == "Linux":
 		if len(argv) == 3 and (argv[1] == "-reverse" or argv[1] == "-r"):
 			reverse = True
 		else:
@@ -42,17 +42,20 @@ if __name__ == '__main__':
 			elif len(argv) == 2 and silent == False:
 				print('Too many arguments')
 			else:
-				path_to_encrypt = os.getcwd() + '/files'
-				if os.path.exists(path_to_encrypt + '/' + 'msg.txt'):
-					os.remove(path_to_encrypt + '/' + 'msg.txt')
-				items = os.listdir(path_to_encrypt)
-				full_path = [path_to_encrypt + '/' + item for item in items]
+				if os.getcwd().endswith('home'):
+					path_to_encrypt = os.getcwd() + '/files'
+					if os.path.exists(path_to_encrypt + '/' + 'msg.txt'):
+						os.remove(path_to_encrypt + '/' + 'msg.txt')
+					items = os.listdir(path_to_encrypt)
+					full_path = [path_to_encrypt + '/' + item for item in items]
 
-				key = key_charge()
+					key = key_charge()
 
-				if os.path.exists('key.key') == True:
-					os.remove('key.key')
+					if os.path.exists('key.key') == True:
+						os.remove('key.key')
 
-				decrypt(full_path, key, silent)
+					decrypt(full_path, key, silent)
+				else:
+					print("You are not in the home folder")
 	else:
-		print("Your system is not Linux or you are not in the home")
+		print("Your system is not Linux")

