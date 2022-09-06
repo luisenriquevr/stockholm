@@ -1,6 +1,6 @@
 from	debian:latest
 
-ADD		./program/	./home/
+ADD		./srcs/	./home/
 
 WORKDIR ./home/
 
